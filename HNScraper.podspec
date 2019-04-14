@@ -14,5 +14,6 @@ Scraper for hackernews written in swift. Supports grabbing posts, comments & use
  
   s.ios.deployment_target = '9.0'
   s.source_files = 'HNScraper/**/*.swift'
+  s.swift_version = '5.0'
  
 end
