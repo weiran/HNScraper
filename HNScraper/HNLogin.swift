@@ -39,7 +39,7 @@ public class HNLogin {
         }
     }
     
-    public enum HNLoginError {
+    public enum HNLoginError: Error {
         case badCredentials
         case serverUnreachable
         case noInternet
