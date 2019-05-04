@@ -55,9 +55,10 @@ class RessourceFetcher {
     static let shared = RessourceFetcher()
     
     /// Fetches the ressource pointed by the specified url and passes it to the completionHandler
-    func fetchData(urlString: String, completion: @escaping FetchCompletion, timeout: TimeInterval = 20) {
+    func fetchData(urlString: String, cookies: [HTTPCookie] = [], completion: @escaping FetchCompletion, timeout: TimeInterval = 20) {
         if let url = URL(string: urlString) {
-            let req = URLRequest(url: url, cachePolicy: .reloadIgnoringCacheData, timeoutInterval: timeout)
+            var req = URLRequest(url: url, cachePolicy: .reloadIgnoringCacheData, timeoutInterval: timeout)
+            req.allHTTPHeaderFields = HTTPCookie.requestHeaderFields(with: cookies)
             self.execRequest(req, completion: {(data, response, error) -> Void in
                 completion(data, error)
             })

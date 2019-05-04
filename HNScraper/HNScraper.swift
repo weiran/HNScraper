@@ -192,7 +192,8 @@ public class HNScraper {
      parameter when the download is completed
      */
     private func downloadHtmlPage(urlString: String, cookie: HTTPCookie? = nil, completion: @escaping ((String?, HNScraperError?) -> Void)) {
-        RessourceFetcher.shared.fetchData(urlString: urlString, completion: {(data, error) -> Void in
+        let cookies: [HTTPCookie] = cookie != nil ? [cookie!] : []
+        RessourceFetcher.shared.fetchData(urlString: urlString, cookies: cookies, completion: {(data, error) -> Void in
             if data == nil {
                 completion(nil, HNScraperError(error) ?? .noData)
             } else {
@@ -357,7 +358,7 @@ public class HNScraper {
         var parsingError: HNScraperError?
         // Fetch the page
         group.enter()
-        downloadHtmlPage(urlString: url, completion: {(html, error) -> Void in
+        downloadHtmlPage(urlString: url, cookie: HNLogin.shared.sessionCookie, completion: {(html, error) -> Void in
             parsingError = error
             _html = html
             group.leave()

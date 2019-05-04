@@ -116,6 +116,7 @@ public class HNLogin {
                             for observer in self.observers {
                                 observer.didLogin(user: user!, cookie: cookie!)
                             }
+                            HTTPCookieStorage.shared.setCookie(cookie!)
                         }
                         completion(user, cookie, error)
                     })
