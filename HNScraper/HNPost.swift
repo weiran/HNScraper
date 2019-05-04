@@ -114,7 +114,7 @@ open class HNPost {
         self.isOPNoob = HNUser.cleanNoobUsername(username: &self.username)
         self.id = postDict["PostId"] as? String ?? ""
         self.time = postDict["Time"] as? String ?? ""
-        if self.id != "" && html.contains("<a id='un_\(self.id)") {
+        if self.id != "" && html.contains("<a id='up_\(self.id)") && html.contains("class='nosee'><div class='votearrow'") {
             self.upvoted = true
         }
         
