@@ -158,7 +158,7 @@ public class HNLogin {
         
         RessourceFetcher.shared.fetchData(urlString: url, completion: {(data, error) -> Void in
             
-            if let html = String(data: data!, encoding: .utf8) {
+            if let data = data, let html = String(data: data, encoding: .utf8) {
                 var newUser: HNUser?
                 // Getting user info
                 if !(html.contains("We've limited requests for this url.")) {
